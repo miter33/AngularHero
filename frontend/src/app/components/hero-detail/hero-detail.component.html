@@ -1,0 +1,16 @@
+<form [formGroup]="heroForm" (submit)="update()">
+    <h2>{{ name.value | uppercase }} Details</h2>
+    <div>
+        <label>
+      name:
+      <input
+        #name
+        formControlName="name"
+        [(ngModel)]="name.value"
+        placeholder="name"
+      />
+    </label>
+    </div>
+    <a (click)="goBack()" class="btn btn-secondary">goBack</a>
+    <button type="submit" class="btn btn-primary" [disabled]="heroForm.invalid">save</button>
+</form>

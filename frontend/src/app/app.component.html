@@ -1,0 +1,8 @@
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <h4 class="bg-primary text-center p-2 text-white">{{ title }}</h4>
+    <a routerLink="/dashboard" class="btn btn-success ml-auto mr-1" *ngIf='this.route.url !== "/login"'>Dashboard</a>
+    <a routerLink="/heroes" class="btn btn-success mr-1" *ngIf='this.route.url !== "/login"'>Heroes</a>
+    <a class="btn btn-dark mr-1" (click)="logout()" *ngIf='this.route.url !== "/login"'>Logout</a>
+</nav>
+<br />
+<router-outlet></router-outlet>

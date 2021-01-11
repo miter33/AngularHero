@@ -1,0 +1,36 @@
+<mat-card class="example-card">
+    <mat-card-title class="title-card">Login</mat-card-title>
+    <div class="bg-danger">
+        <h2 class="text-white list-unstyled text-center" *ngIf="invalidData">
+            Invalid email or password
+        </h2>
+    </div><br />
+    <mat-card-content>
+        <form (ngSubmit)="login(email.value, password.value)" [formGroup]="form">
+            <mat-form-field>
+                <input type="email" #email matInput placeholder="Email" formControlName="email" />
+                <mat-error *ngIf="form.get('email').invalid && form.get('email').touched">
+                    <mat-error *ngIf="form.get('email').errors['required']">Email can`t be empty</mat-error>
+                    <mat-error *ngIf="form.get('email').errors['pattern']">Please enter a valid email</mat-error>
+                </mat-error>
+                <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field><br /><br />
+            <mat-form-field>
+                <input type="password" #password matInput placeholder="Password" formControlName="password" />
+                <mat-error *ngIf="form.get('password').invalid && form.get('password').touched">
+                    <mat-error *ngIf="form.get('password').errors['required']">Password can`t be empty</mat-error>
+                    <mat-error *ngIf="
+                form.get('password').errors['minlength'] &&
+                form.get('password').errors['minlength']['requiredLength']
+              ">Your password needs to be at least {{ form.get("password").errors["minlength"]["requiredLength"] }} characters. Please enter a longer one. You entered {{ form.get("password").errors["minlength"]["actualLength"] }} characters
+                    </mat-error>
+                </mat-error>
+                <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="login-button" [disabled]="form.invalid">
+          Login
+        </button>
+            <a href="#" class="reference">Forgot password?</a>
+        </form>
+    </mat-card-content>
+</mat-card>

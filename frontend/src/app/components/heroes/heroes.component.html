@@ -1,0 +1,23 @@
+<h2>My Heroes</h2>
+<form (ngSubmit)="create(heroName.value); form.reset()" [formGroup]="form">
+    <div>
+        <mat-card>
+            <mat-form-field>
+                <label>Hero name:</label>
+                <input (keydown.space)="$event.preventDefault()" #heroName formControlName="heroName" type="text" matInput />
+                <mat-error *ngIf="!validHeroAfterTouch">
+                    <mat-error *ngIf="!validHeroByRequired">Hero can`t be empty </mat-error>
+                    <mat-error *ngIf="!validHeroByLength">
+                        The name of hero must be {{ form.get("heroName").errors["minlength"]["requiredLength"] }} characters. Please enter a longer one.
+                    </mat-error>
+                </mat-error>
+            </mat-form-field>
+            <br />
+            <button type="submit" class="btn btn-secondary" [disabled]="!validForm">Create</button>
+        </mat-card>
+    </div>
+    <div *ngFor="let hero of heroes$ | async; let i = index">
+        <button class="button-hero" mat-raised-button color='primary' (click)='goToDetail(hero.id)'>{{ i + 1 }}. {{ hero.name }}</button>
+        <button mat-raised-button color='warn' (click)="delete(hero)">Delete</button>
+    </div>
+</form>
